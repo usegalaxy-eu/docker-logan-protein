@@ -8,4 +8,4 @@ You can start the container outside of Galaxy with:
 
 ```bash
 docker run -i -t --rm -v /path/to/infile.tiff:/opt/infile.tiff quay.io/bgruening/logan-protein bash
-``
+```
