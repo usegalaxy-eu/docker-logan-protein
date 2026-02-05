@@ -21,6 +21,6 @@ RUN conda install -y -c conda-forge -c bioconda -c nvidia -c pytorch \
     conda clean -afy
 
 WORKDIR /app
-RUN curl -L https://github.com/RolandFaure/search_protein/archive/refs/heads/main.tar.gz | tar -xz --strip-components=1
+RUN curl -fLsS https://github.com/RolandFaure/search_protein/archive/refs/heads/master.tar.gz | tar -xz --strip-components=1
 
 ## python3 embed_query.py -h
