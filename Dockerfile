@@ -1,14 +1,25 @@
-# Base image with PyTorch + CUDA 12.1 + cuDNN 8 runtime
-FROM pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
+FROM pytorch/pytorch:2.5.0-cuda12.1-cudnn9-runtime
 
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    wget \
+    unzip \
+    curl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-# Use a non-root user for security (optional)
-RUN useradd -ms /bin/bash appuser
-USER appuser
-WORKDIR /home/appuser
+# The base image already has conda in /opt/conda
+ENV PATH=/opt/conda/bin:$PATH
 
-# Install your tool from PyPI or any other way ...
-RUN pip install --no-cache-dir doclayout-yolo==0.0.4
+RUN conda install -y -c conda-forge -c bioconda -c nvidia -c pytorch \
+    mmseqs2 \
+    "faiss-cpu>=1.8" \
+    numpy scikit-learn transformers einops && \
+    conda clean -afy
 
+WORKDIR /app
+RUN git clone https://github.com/RolandFaure/search_protein.git . 
+
+## python3 embed_query.py -h
