@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     curl \
     ca-certificates \
+    libzstd-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # The base image already has conda in /opt/conda
@@ -22,5 +23,7 @@ RUN conda install -y -c conda-forge -c bioconda -c nvidia -c pytorch \
 
 WORKDIR /app
 RUN curl -fLsS https://github.com/RolandFaure/search_protein/archive/refs/heads/master.tar.gz | tar -xz --strip-components=1
+
+RUN make
 
 ## python3 embed_query.py -h
