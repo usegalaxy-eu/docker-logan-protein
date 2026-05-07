@@ -18,8 +18,13 @@ RUN conda install -y -c conda-forge -c bioconda -c nvidia -c pytorch \
     numpy \
     scikit-learn \
     transformers=4.36.2 \
+    biopython \
+    zstandard \
     einops && \
     conda clean -afy
+
+# Install pip-only packages
+RUN pip install usearch pca --no-cache-dir
 
 WORKDIR /app
 RUN curl -fLsS https://github.com/RolandFaure/search_protein/archive/refs/heads/master.tar.gz | tar -xz --strip-components=1
