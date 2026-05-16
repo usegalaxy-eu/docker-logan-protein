@@ -32,3 +32,10 @@ RUN curl -fLsS https://github.com/RolandFaure/search_protein/archive/refs/heads/
 RUN make
 
 ## python3 embed_query.py -h
+
+# Pre-download the model and cache it in the image. This will avoid downloading the model every time the tool is run. 
+ENV HF_HOME=/app/.cache/huggingface
+RUN python -c "from transformers import AutoModel, AutoTokenizer; \
+    model_name = 'tattabio/gLM2_650M_embed'; \
+    AutoTokenizer.from_pretrained(model_name, trust_remote_code=True); \
+    AutoModel.from_pretrained(model_name, trust_remote_code=True)"
