@@ -17,7 +17,7 @@ RUN conda install -y -c conda-forge -c bioconda -c nvidia -c pytorch \
     "faiss-cpu>=1.8" \
     numpy \
     scikit-learn \
-    transformers=4.36.2 \
+    transformers \
     biopython \
     zstandard \
     einops && \
