@@ -14,7 +14,9 @@ ENV PATH=/opt/conda/bin:$PATH
 
 RUN conda install -y -c conda-forge -c bioconda -c nvidia -c pytorch \
     mmseqs2 \
-    "faiss-cpu>=1.8" \
+    "faiss-cpu=1.14.3" \
+    "libfaiss=1.14.3=*_201_cpu" \
+    "faiss=1.14.3=*_201_cpu" \
     numpy \
     scikit-learn \
     transformers \
