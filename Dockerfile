@@ -19,7 +19,9 @@ RUN conda install -y -c conda-forge -c bioconda -c nvidia -c pytorch \
     "faiss=1.14.3=*_201_cpu" \
     numpy \
     scikit-learn \
-    transformers \
+    "transformers=5.16.1" \
+    "tokenizers=0.23.1" \
+    "huggingface_hub=1.16.1" \
     biopython \
     zstandard \
     einops && \
